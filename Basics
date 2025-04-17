@@ -1,0 +1,44 @@
+#Database 
+Organised collection of data, it support electronic storage and manupulation.
+
+#Relational Database(SQL)
+Maintain integrity between two or more tables. and we fetch data using joins. (Example-OracleDB, SSMS, MySQL etc.)
+Database --> Tables --> Rows / Columns
+
+#Non-Relational Database(NoSQL)
+Data does not store in integrated format, that means stored data in DB does not have dependency on each other.(Example-MongoDB, Redis, DynamoDB, etc.) 
+Collections --> Documents --> JSON Objects
+
+#SQL(Structured Query Language)
+It is used to communicate with the DB and produced output which is called resultset.
+Support only Relational DB.
+Standardalized by ANSI(American National Standard Institutes)
+
+#Data Types
+1) String
+  char(n) --> Fixed-length character data of n bytes (1 to 2000). Pads with spaces. --> name CHAR(10) — stores "Ram" as "Ram       "
+  varchar(n) --> Same as VARCHAR2, but deprecated (use VARCHAR2 instead). --> title VARCHAR(100) — behaves like VARCHAR2, but avoid using
+  varchar2(n) --> Variable-length character data of n bytes (1 to 4000). Most used. --> email VARCHAR2(50) — stores only the actual length like "a@b.com"
+  NCHAR(n) --> Fixed-length Unicode character data. Useful for multilingual data. --> lang_code NCHAR(5) — stores "हिंदी"
+  NVARCHAR2(n) --> Variable-length Unicode character data. --> description NVARCHAR2(100) — stores multilingual strings 
+  CLOB --> Character Large Object; stores up to 4GB of character data. --> comments CLOB — stores large text like articles, documents
+  NCLOB --> Unicode version of CLOB. --> bio NCLOB — stores large multilingual text like resume data
+
+2) Numeric
+  NUMBER(p,s) --> Stores fixed or floating-point numbers. --> salary NUMBER(7,2) — allows up to 99999.99
+  NUMBER --> Stores any numeric value without precision or scale limits. --> marks NUMBER — can store large or small numbers
+  FLOAT(p) --> Approximate numeric with binary precision. --> pi FLOAT(10) — stores 3.1415926... 
+  INTEGER / INT --> ANSI synonym for NUMBER(38). Stores whole numbers. --> age INTEGER — stores values like 20, 35, etc.
+  DEC / DECIMAL --> Synonyms for NUMBER(p,s). Fixed-point numbers.--> price DECIMAL(5,2) — stores 123.45
+  REAL --> ANSI synonym for FLOAT. --> average REAL — approximate values
+  SMALLINT --> Synonym for NUMBER(38), but conventionally for smaller integers. --> rating SMALLINT — stores 0 to 32767 (suggested)
+  BINARY_FLOAT --> 32-bit approximate binary floating-point. Faster than NUMBER for math ops.--> temp BINARY_FLOAT — stores 98.6
+  BINARY_DOUBLE --> 64-bit approximate binary floating-point. --> result BINARY_DOUBLE — stores 123456.78901234
+
+3) Date and time
+  DATE --> Stores date and time (from Jan 1, 4712 BC to Dec 31, 9999 AD --> hire_date DATE — stores '17-APR-2025 10:15:00' 
+  TIMESTAMP --> Stores date and time with fractional seconds (up to 9 digits) --> og_time TIMESTAMP — stores '17-APR-2025 10:15:00.123456'
+  TIMESTAMP WITH TIME ZONE --> Stores date and time including time zone information --> meeting_time TIMESTAMP WITH TIME ZONE — stores '17-APR-2025 10:15:00.00 +05:30'
+  TIMESTAMP WITH LOCAL TIME ZONE --> Stores timestamp normalized to the database time zone (no TZ stored) --> session_time TIMESTAMP WITH LOCAL TIME ZONE — auto-adjusts based on user TZ
+  INTERVAL YEAR TO MONTH --> Stores a time span in years and months --> duration INTERVAL YEAR TO MONTH — stores '2-6' (2 years, 6 months)
+  INTERVAL DAY TO SECOND --> Stores a time span in days, hours, minutes, seconds (with fractional sec) --> response_time INTERVAL DAY TO SECOND — stores '3 04:05:06.789'
