@@ -54,6 +54,92 @@ DELETE FROM table_name WHERE condition;
 DELETE FROM table_name; --> It work same like TRUNCATE but it will not reset identity values.
 
 
+#Transaction Control Language(TCL)
+
+1) COMMIT --> Used to save all changes made by the transaction.(Top-Down approach)
+2) ROLLBACK --> Used to undo changes since last commit, if something goes wrong.(Bottom-Up approach)
+3) SAVEPOINT --> Set point to ROLLBACK to within transaction --> SAVEPOINT savepoint_name.
+Why and When to Use SET TRANSACTION?
+ 
+1. Read-Only Mode (for safety in reports)
+Use when you want to just read data and avoid accidental updates.
+
+SET TRANSACTION READ ONLY;
+  SELECT * FROM employees;
+ 
+  -- If you try:
+  -- UPDATE employees SET salary = 1000;
+  -- It will give an error!
+ 
+Use it in reports or dashboards where you must not modify data.
+
+2. Read-Write Mode (default)
+If you want to make changes, you can write:
+ 
+SET TRANSACTION READ WRITE;
+  -- You can INSERT, UPDATE, DELETE
+ 
+Note: Oracle assumes READ WRITE by default, so you usually don’t need to write this unless you're being explicit.
+
+3. Serializable Mode (Advanced)
+Use when you want to prevent others from changing the data while you’re reading it.
+ 
+SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
+ 
+  SELECT * FROM orders WHERE status = 'pending';
+  -- This ensures no one else changes 'orders' data until you COMMIT
+ 
+This is used in financial or sensitive applications.
+
+--We can COMMIT Rollbacked transaction but we can't ROLLBACK commited transaction.
+
+Example -
+-- Update the order details
+UPDATE orders SET order_status = 'Processed' WHERE order_id = 1;
+
+-- Create a savepoint after updating the order
+SAVEPOINT order_updated;
+
+-- Update the payment details
+UPDATE payments SET payment_status = 'Completed' WHERE payment_id = 1;
+
+-- If something goes wrong, rollback to the savepoint
+ROLLBACK TO order_updated;
+
+-- Commit the transaction if everything is successful
+COMMIT;
+
+
+#Data Control Language (DCL)
+Used to GRANT and REVOKE permissionn from DB users.
+Generally it is used by DBA.
+
+1) GRANT --> Used to give users access privileges to database objects.
+  It allow user to access specified permission.
+
+Example - 
+GRANT SELECT ON table_name TO user_name; --> Grant SELECT privilege on a table to a user
+
+GRANT SELECT, INSERT, UPDATE ON table_name TO user_name; --> Grant multiple privileges on a table to a user
+
+GRANT ALL PRIVILEGES ON table_name TO user_name; --> Grant all privileges on a table to a user
+
+
+2) REVOKE --> Used to remove access privileges from users.
+
+Example - 
+REVOKE SELECT ON table_name FROM user_name; --> Revoke SELECT privilege on a table from a user
+
+REVOKE SELECT, INSERT, UPDATE ON table_name FROM user_name; --> Revoke multiple privileges on a table from a user
+
+REVOKE ALL PRIVILEGES ON table_name FROM user_name; --> Revoke all privileges on a table from a user
+
+
+
+
+
+
+
 
 
 
