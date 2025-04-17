@@ -1,0 +1,56 @@
+-- Arithmetic Operators
++   --> Addition
+-   --> Subtraction
+*   --> Multiplication
+/   --> Division
+MOD(x, y) --> Returns remainder of x divided by y
+ 
+-- Comparison Operators
+=   --> Equal to
+!=  --> Not equal to
+<>  --> Not equal to (alternate syntax)
+>   --> Greater than
+<   --> Less than
+>=  --> Greater than or equal to
+<=  --> Less than or equal to
+ 
+-- Logical Operators
+BETWEEN --> Between two values (inclusive)
+IN  --> Matches any value in a list
+LIKE --> Pattern matching (e.g., LIKE 'A%') (Wildcards -> %, _)
+IS NULL --> Checks if value is NULL
+IS NOT NULL --> Checks if value is NOT NULL
+AND --> True if both conditions are true
+OR  --> True if any one condition is true
+NOT --> Reverses the condition
+ 
+-- Set Operators
+UNION      --> Combines results, removes duplicates
+UNION ALL  --> Combines all results including duplicates
+INTERSECT  --> Returns only matching rows from both queries
+MINUS      --> Returns rows from first query not in second
+ 
+-- String Operator
+||  --> Concatenates two strings
+
+-- Subquery/Membership Operators
+EXISTS --> Returns true if subquery returns rows
+ANY    --> Compares with any value from subquery
+ALL    --> Compares with all values from subquery
+ 
+-- Hierarchical Query Operators
+CONNECT BY --> Defines parent-child relationship
+START WITH --> Specifies root row for hierarchy
+LEVEL       --> Shows depth level in hierarchy
+SYS_CONNECT_BY_PATH --> Returns path from root to node
+ 
+-- Miscellaneous Operators/Functions
+IS [NOT] NULL --> Check for (non) null
+CAST(expr AS type) --> Convert data type
+COALESCE(a, b, c, ...) --> First non-null value
+NVL(expr1, expr2) --> Replace NULL with another value
+DECODE(expr, val1, res1, val2, res2, ...) --> IF-THEN-ELSE logic
+CASE WHEN cond THEN result [...] ELSE default END --> Conditional logic
+ 
+-- Bitwise (PL/SQL)
+BITAND(x, y) --> Bitwise AND
