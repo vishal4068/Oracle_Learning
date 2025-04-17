@@ -1,0 +1,40 @@
+-- NULL Handling Functions in Oracle SQL
+ 
+NVL(expr1, expr2)
+--> If expr1 is NULL, return expr2; otherwise, return expr1
+-- Example: NVL(salary, 0)
+ 
+NVL2(expr1, expr2, expr3)
+--> If expr1 is NOT NULL, return expr2; if NULL, return expr3
+-- Example: NVL2(bonus, 'Yes', 'No')
+ 
+NULLIF(expr1, expr2)
+--> Returns NULL if expr1 = expr2; otherwise returns expr1
+-- Example: NULLIF(salary, 0)
+ 
+COALESCE(expr1, expr2, expr3, ...)
+--> Returns the first non-NULL expression from the list
+-- Example: COALESCE(comm, bonus, 0)
+ 
+CASE WHEN expr IS NULL THEN ... ELSE ... END
+--> Custom handling of NULLs
+-- Example: CASE WHEN salary IS NULL THEN 'No Salary' ELSE salary END
+ 
+-- Additional Techniques
+ 
+IS NULL
+--> Checks if a value is NULL
+-- Example: WHERE bonus IS NULL
+ 
+IS NOT NULL
+--> Checks if a value is NOT NULL
+-- Example: WHERE bonus IS NOT NULL
+ 
+-- Example of combining multiple:
+SELECT
+  emp_id,
+  NVL(salary, 0) AS adjusted_salary,
+  NVL2(bonus, 'Got Bonus', 'No Bonus') AS bonus_status,
+  COALESCE(bonus, comm, 0) AS fallback_income,
+  CASE WHEN dept_id IS NULL THEN 'Unassigned' ELSE dept_id END AS dept_status
+FROM employees;
