@@ -1,0 +1,411 @@
+-- Oracle SQL String Functions
+ 
+1. LENGTH(str)
+--> Returns length of the string
+-- Example: LENGTH('Oracle') → 6
+ 
+2. LENGTHB(str)
+--> Returns length in bytes (useful for multibyte characters)
+ 
+3. LENGTHC(str)
+--> Returns length in Unicode characters
+ 
+4. INSTR(str, substr [, start_pos [, nth_appearance]])
+--> Returns position of substring
+-- Example: INSTR('OracleSQL', 'S') → 7
+ 
+5. INSTRB, INSTRC
+--> Byte or character-based versions of INSTR
+ 
+6. SUBSTR(str, start_pos [, length])
+--> Returns substring
+-- Example: SUBSTR('Oracle', 2, 3) → 'rac'
+ 
+7. SUBSTRB, SUBSTRC
+--> Byte or character-based versions
+ 
+8. CONCAT(str1, str2)
+--> Concatenates two strings
+-- Example: CONCAT('Ora', 'cle') → 'Oracle'
+ 
+9. ||
+--> String concatenation operator
+-- Example: 'Oracle' || 'SQL' → 'OracleSQL'
+ 
+10. REPLACE(str, search_str [, replacement])
+--> Replaces all occurrences
+-- Example: REPLACE('Hello World', 'World', 'Oracle') → 'Hello Oracle'
+ 
+11. TRANSLATE(str, from_str, to_str)
+--> Character-by-character substitution
+-- Example: TRANSLATE('12345', '123', 'abc') → 'abc45'
+ 
+12. LPAD(str, length [, pad_str])
+--> Left-pads string
+-- Example: LPAD('123', 5, '0') → '00123'
+ 
+13. RPAD(str, length [, pad_str])
+--> Right-pads string
+-- Example: RPAD('123', 5, '0') → '12300'
+ 
+14. TRIM([LEADING|TRAILING|BOTH] trim_char FROM str)
+--> Removes leading/trailing/both characters
+-- Example: TRIM(' ' FROM ' Oracle ') → 'Oracle'
+ 
+15. LTRIM(str [, trim_chars])
+--> Removes leading characters
+-- Example: LTRIM('  Oracle') → 'Oracle'
+ 
+16. RTRIM(str [, trim_chars])
+--> Removes trailing characters
+-- Example: RTRIM('Oracle  ') → 'Oracle'
+ 
+17. LOWER(str)
+--> Converts to lowercase
+-- Example: LOWER('ORACLE') → 'oracle'
+ 
+18. UPPER(str)
+--> Converts to uppercase
+-- Example: UPPER('oracle') → 'ORACLE'
+ 
+19. INITCAP(str)
+--> Capitalizes first letter of each word
+-- Example: INITCAP('oracle sql') → 'Oracle Sql'
+ 
+20. ASCII(str)
+--> Returns ASCII code of first character
+-- Example: ASCII('A') → 65
+ 
+21. CHR(n)
+--> Returns character for ASCII code n
+-- Example: CHR(65) → 'A'
+ 
+22. SOUNDEX(str)
+--> Returns phonetic representation
+-- Example: SOUNDEX('Oracle') → 'O624'
+ 
+23. DUMP(str)
+--> Returns datatype, length, and internal representation
+-- Example: DUMP('A') → 'Typ=96 Len=1: 65'
+ 
+24. REGEXP_LIKE(str, pattern)
+--> Returns TRUE if string matches regex
+-- Example: WHERE REGEXP_LIKE(name, '^A')
+ 
+25. REGEXP_INSTR(str, pattern [, start_pos [, occurrence]])
+--> Returns position where regex pattern matches
+ 
+26. REGEXP_SUBSTR(str, pattern [, start_pos [, occurrence]])
+--> Returns substring matching regex pattern
+ 
+27. REGEXP_REPLACE(str, pattern, replacement [, start_pos [, occurrence]])
+--> Replaces regex pattern with replacement
+ 
+28. TO_CHAR(expr [, format])
+--> Converts date/number to string
+-- Example: TO_CHAR(SYSDATE, 'YYYY-MM-DD')
+ 
+29. RAWTOHEX(str)
+--> Converts RAW or string to hexadecimal
+ 
+30. HEXTORAW(str)
+--> Converts hexadecimal back to RAW
+ 
+31. NLS_INITCAP(str [, NLS_param])
+--> Locale-aware INITCAP
+ 
+32. NLS_LOWER(str [, NLS_param])
+--> Locale-aware LOWER
+ 
+33. NLS_UPPER(str [, NLS_param])
+--> Locale-aware UPPER
+
+
+-- Oracle SQL Numeric Functions
+ 
+1. ABS(n)
+--> Returns absolute (positive) value
+-- Example: SELECT ABS(-15) FROM DUAL; --> 15
+ 
+2. CEIL(n)
+--> Rounds up to the next integer
+-- Example: SELECT CEIL(4.2) FROM DUAL; --> 5
+ 
+3. FLOOR(n)
+--> Rounds down to the previous integer
+-- Example: SELECT FLOOR(4.8) FROM DUAL; --> 4
+ 
+4. ROUND(n [, decimals])
+--> Rounds to specified decimal places
+-- Example: SELECT ROUND(3.456, 2) FROM DUAL; --> 3.46
+ 
+5. TRUNC(n [, decimals])
+--> Truncates number to decimal places (no rounding)
+-- Example: SELECT TRUNC(3.456, 2) FROM DUAL; --> 3.45
+ 
+6. MOD(m, n)
+--> Returns remainder of m/n
+-- Example: SELECT MOD(10, 3) FROM DUAL; --> 1
+ 
+7. POWER(m, n)
+--> Raises m to the power of n
+-- Example: SELECT POWER(2, 3) FROM DUAL; --> 8
+ 
+8. SQRT(n)
+--> Returns square root of number
+-- Example: SELECT SQRT(16) FROM DUAL; --> 4
+ 
+9. EXP(n)
+--> Returns e raised to the power n
+-- Example: SELECT EXP(1) FROM DUAL; --> 2.718...
+ 
+10. LN(n)
+--> Returns natural log (base e)
+-- Example: SELECT LN(10) FROM DUAL;
+ 
+11. LOG(b, x)
+--> Returns log of x with base b (LOG is available as LOG(n) = LOG base 10)
+-- Example: SELECT LOG(10, 100) FROM DUAL; --> 2
+ 
+12. LOG(n)
+--> Returns base-10 logarithm
+-- Example: SELECT LOG(100) FROM DUAL;
+ 
+13. SIGN(n)
+--> Returns -1 if negative, 0 if zero, 1 if positive
+-- Example: SELECT SIGN(-15) FROM DUAL; --> -1
+ 
+14. GREATEST(n1, n2, ...)
+--> Returns the highest value among given
+-- Example: SELECT GREATEST(10, 20, 5) FROM DUAL; --> 20
+ 
+15. LEAST(n1, n2, ...)
+--> Returns the smallest value among given
+-- Example: SELECT LEAST(10, 20, 5) FROM DUAL; --> 5
+ 
+16. WIDTH_BUCKET(expr, min_value, max_value, num_buckets)
+--> Divides range into equal-width buckets and returns bucket number
+-- Example: SELECT WIDTH_BUCKET(55, 0, 100, 5) FROM DUAL; --> 3
+ 
+17. NANVL(expr1, expr2)
+--> Returns expr2 if expr1 is NaN (useful with BINARY_FLOAT, BINARY_DOUBLE)
+ 
+18. REMAINDER(m, n)
+--> Returns remainder (similar to MOD but follows IEEE rules)
+-- Example: SELECT REMAINDER(10, 3) FROM DUAL; --> 1
+ 
+19. TO_NUMBER(expr [, format_model])
+--> Converts a string to a number
+-- Example: SELECT TO_NUMBER('123') FROM DUAL;
+ 
+-- Aggregate numeric functions (also considered numeric functions)
+20. SUM(expr)
+21. AVG(expr)
+22. MAX(expr)
+23. MIN(expr)
+24. COUNT(expr) --> Total rows=10, null=5 then count(1)=10, count(*)=10, count('a')=10, count(colname)=5(Not count null values)
+ 
+-- These are used with GROUP BY or standalone:
+-- Example: SELECT AVG(salary) FROM employees;
+
+
+
+-- Oracle Date/Time Functions (Built-in)
+ 
+1. SYSDATE
+--> Returns current date & time from the server (without timezone)
+-- Example: SELECT SYSDATE FROM DUAL;
+ 
+2. SYSTIMESTAMP
+--> Returns current date & time **with timezone**
+-- Example: SELECT SYSTIMESTAMP FROM DUAL;
+ 
+3. CURRENT_DATE
+--> Returns current date & time **in user's session timezone**
+-- Example: SELECT CURRENT_DATE FROM DUAL;
+ 
+4. CURRENT_TIMESTAMP
+--> Returns timestamp with time zone in session time zone
+-- Example: SELECT CURRENT_TIMESTAMP FROM DUAL;
+ 
+5. LOCALTIMESTAMP
+--> Returns current timestamp without time zone
+-- Example: SELECT LOCALTIMESTAMP FROM DUAL;
+ 
+6. DBTIMEZONE
+--> Returns database's time zone
+-- Example: SELECT DBTIMEZONE FROM DUAL;
+ 
+7. SESSIONTIMEZONE
+--> Returns current session time zone
+-- Example: SELECT SESSIONTIMEZONE FROM DUAL;
+ 
+8. TO_DATE(char, format)
+--> Converts string to DATE
+-- Example: SELECT TO_DATE('2024-04-17', 'YYYY-MM-DD') FROM DUAL;
+ 
+9. TO_CHAR(date, format)
+--> Converts date to formatted string
+-- Example: SELECT TO_CHAR(SYSDATE, 'DD-MON-YYYY HH24:MI:SS') FROM DUAL;
+    YYYY    --> 4-digit year                           --> 2025
+    YY      --> Last 2 digits of year                  --> 25
+    RR      --> 2-digit year (Y2K safe)                --> 25 (interprets century smartly)
+ 
+    MM      --> Month (01-12)                          --> 04
+    MON     --> Abbreviated month name                 --> APR
+    MONTH   --> Full month name (padded)               --> APRIL
+ 
+    DD      --> Day of month (01-31)                   --> 17
+    D       --> Day of week (1-7, locale-based)        --> 5 (if Thursday)
+    DY      --> Abbreviated day name                   --> THU
+    DAY     --> Full day name (padded)                 --> THURSDAY
+ 
+    HH      --> Hour (1-12)                            --> 02
+    HH12    --> Hour (1-12)                            --> 02
+    HH24    --> Hour (0-23)                            --> 14
+ 
+    MI      --> Minute                                 --> 30
+    SS      --> Seconds                                --> 45
+    SSSSS   --> Seconds since midnight                 --> 52245
+ 
+    AM, PM          --> Meridian indicator             --> PM
+    A.M., P.M.      --> Meridian (with dots)           --> P.M.
+ 
+    TZH     --> Time zone hour offset                  --> +05
+    TZM     --> Time zone minute offset                --> 30
+    TZR     --> Time zone region                       --> Asia/Kolkata
+ 
+    FF      --> Fractional seconds (upto FF1–FF9)      --> 123456789
+
+10. TO_TIMESTAMP(char, format)
+--> Converts string to TIMESTAMP
+-- Example: SELECT TO_TIMESTAMP('2024-04-17 14:30:00', 'YYYY-MM-DD HH24:MI:SS') FROM DUAL;
+
+11. EXTRACT(part FROM date)
+--> Extracts part of date/time
+-- Example: SELECT EXTRACT(YEAR FROM SYSDATE) FROM DUAL;
+    YEAR             --> Year (e.g., 2025)
+    QUARTER          --> Quarter of the year (1 to 4)
+    MONTH            --> Month (1 to 12)
+    DAY              --> Day of month (1 to 31)
+    HOUR             --> Hour of the day (0 to 23)
+    MINUTE           --> Minutes past the hour (0 to 59)
+    SECOND           --> Seconds past the minute (can include fractional)
+    TIMEZONE_HOUR    --> Hour part of time zone offset (e.g., +05 from +05:30)
+    TIMEZONE_MINUTE  --> Minute part of time zone offset (e.g., 30 from +05:30)
+    TIMEZONE_REGION  --> Time zone region name (e.g., Asia/Kolkata)*
+    TIMEZONE_ABBR    --> Time zone abbreviation (e.g., IST)*
+ 
+  -- For INTERVAL YEAR TO MONTH:
+    YEAR             --> Extracts years from INTERVAL
+    MONTH            --> Extracts months from INTERVAL
+ 
+  -- For INTERVAL DAY TO SECOND:
+    DAY              --> Extracts days from INTERVAL
+    HOUR             --> Extracts hours from INTERVAL
+    MINUTE           --> Extracts minutes from INTERVAL
+    SECOND           --> Extracts seconds (with decimals) from INTERVAL
+ 
+12. ADD_MONTHS(date, n)
+--> Adds n months to a date
+-- Example: SELECT ADD_MONTHS(SYSDATE, 3) FROM DUAL;
+
+-- Adding Days
+TO_DATE('2025-04-17', 'YYYY-MM-DD') + n 
+
+-- Adding Months
+ADD_MONTHS(TO_DATE('2025-04-17', 'YYYY-MM-DD'), n) 
+
+-- Adding Years
+ADD_MONTHS(TO_DATE('2025-04-17', 'YYYY-MM-DD'), n * 12) 
+
+-- Adding Hours
+TO_DATE('2025-04-17', 'YYYY-MM-DD') + (n / 24) 
+
+-- Adding Minutes
+TO_DATE('2025-04-17', 'YYYY-MM-DD') + (n / 1440) 
+
+-- Adding Seconds
+TO_DATE('2025-04-17', 'YYYY-MM-DD') + (n / 86400) 
+
+-- Adding Milliseconds
+TO_DATE('2025-04-17', 'YYYY-MM-DD') + (n / 86400000) 
+
+-- Adding Weeks
+TO_DATE('2025-04-17', 'YYYY-MM-DD') + (n * 7) 
+
+-- Adding Quarters
+ADD_MONTHS(TO_DATE('2025-04-17', 'YYYY-MM-DD'), n * 3) 
+
+13. MONTHS_BETWEEN(d1, d2)
+--> Returns months between two dates
+-- Example: SELECT MONTHS_BETWEEN(SYSDATE, TO_DATE('2023-01-01', 'YYYY-MM-DD')) FROM DUAL;
+ 
+14. NEXT_DAY(date, 'DAY')
+--> Returns next occurrence of day
+-- Example: SELECT NEXT_DAY(SYSDATE, 'FRIDAY') FROM DUAL;
+ 
+15. LAST_DAY(date)
+--> Returns last day of the month
+-- Example: SELECT LAST_DAY(SYSDATE) FROM DUAL;
+ 
+16. ROUND(date [, fmt])
+--> Rounds date to nearest day, month, year, etc.
+-- Example: SELECT ROUND(SYSDATE, 'MONTH') FROM DUAL;
+ 
+17. TRUNC(date [, fmt])
+--> Truncates date to day, month, year, etc.
+-- Example: SELECT TRUNC(SYSDATE, 'YEAR') FROM DUAL;
+ 
+18. NEW_TIME(date, timezone1, timezone2)
+--> Converts date between time zones
+-- Example: SELECT NEW_TIME(SYSDATE, 'GMT', 'IST') FROM DUAL;
+ 
+19. CURRENT_DATE - SYSDATE
+--> Use to find session time zone effect (might return difference)
+ 
+20. NUMTODSINTERVAL(n, 'unit')
+--> Converts number to interval (second, minute, hour, day)
+-- Example: SELECT SYSDATE + NUMTODSINTERVAL(2, 'HOUR') FROM DUAL;
+ 
+21. NUMTOYMINTERVAL(n, 'unit')
+--> Converts number to year/month interval
+-- Example: SELECT ADD_MONTHS(SYSDATE, 6) = SYSDATE + NUMTOYMINTERVAL(6, 'MONTH') FROM DUAL;
+ 
+22. INTERVAL keyword
+--> Create custom interval directly
+-- Example: SELECT SYSDATE + INTERVAL '3' DAY FROM DUAL;
+ 
+23. CURRENT_DATE - <any date>
+--> Subtracting dates returns number of days
+-- Example: SELECT SYSDATE - TO_DATE('2024-01-01','YYYY-MM-DD') FROM DUAL;
+
+--------------------Difference Between two dates-----------------------------
+
+--Hour Difference
+TO_DATE('2025-04-17', 'YYYY-MM-DD') - TO_DATE('2025-01-01', 'YYYY-MM-DD')) * 24 
+
+--Minutes Difference
+TO_DATE('2025-04-17', 'YYYY-MM-DD') - TO_DATE('2025-01-01', 'YYYY-MM-DD')) * 24 * 60 
+
+--Seconds Difference
+TO_DATE('2025-04-17', 'YYYY-MM-DD') - TO_DATE('2025-01-01', 'YYYY-MM-DD')) * 24 * 60 * 60
+
+--Milliseconds Difference
+TO_DATE('2025-04-17', 'YYYY-MM-DD') - TO_DATE('2025-01-01', 'YYYY-MM-DD')) * 24 * 60 * 60 * 1000 
+
+--Weeks Difference
+FLOOR((TO_DATE('2025-04-17', 'YYYY-MM-DD') - TO_DATE('2025-01-01', 'YYYY-MM-DD')) / 7
+
+--Month Difference
+MONTHS_BETWEEN(date1, date2);
+
+--Day Difference
+TO_DATE(date, 'YYYY-MM-DD') - TO_DATE(date, 'YYYY-MM-DD')
+
+--Quarter Difference
+FLOOR(MONTHS_BETWEEN(date1, date2)) / 3
+
+--Year Difference
+FLOOR(MONTHS_BETWEEN(date1, date2)) / 12
+ 
