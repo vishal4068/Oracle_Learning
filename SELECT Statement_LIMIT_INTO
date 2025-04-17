@@ -1,0 +1,66 @@
+#SELECT 
+SELECT * FROM table_name;
+
+#Limiting Rows
+1) FETCH FIRST n ROWS ONLY (Oracle 12c and above)
+
+SELECT * FROM employees
+ORDER BY salary DESC
+FETCH FIRST 5 ROWS ONLY;
+ 
+Use case: Get top 5 highest paid employees.
+
+2) OFFSET ... FETCH
+ 
+SELECT * FROM employees
+ORDER BY employee_id
+OFFSET 10 ROWS FETCH NEXT 5 ROWS ONLY;
+ 
+Use case: Skip first 10 rows, then fetch next 5 (pagination: page 3 with 5 rows per page).
+
+3) ROWNUM (Old school)
+ 
+SELECT * FROM employees
+WHERE ROWNUM <= 5;
+ 
+Limitation: ROWNUM is assigned before ORDER BY, so it might not return top rows unless you wrap it.
+
+4) ROWNUM with subquery + ORDER BY
+ 
+SELECT * FROM (
+  SELECT * FROM employees ORDER BY salary DESC
+)
+WHERE ROWNUM <= 5;
+ 
+Use case: Correct way to use ROWNUM after ordering.
+
+5) ROWNUM with pagination (older Oracle versions)
+ 
+SELECT * FROM (
+  SELECT e.*, ROWNUM rn FROM (
+    SELECT * FROM employees ORDER BY employee_id
+  ) e
+  WHERE ROWNUM <= 20
+)
+WHERE rn > 10;
+ 
+Use case: Emulates pagination (rows 11 to 20).
+
+
+#INTO
+
+--Backup
+
+CREATE TABLE BackupTable AS 
+SELECT * FROM oldTable WHERE 1=0; --> Only table structure Without Data
+
+CREATE TABLE BackupTable AS 
+SELECT * FROM oldTable WHERE 1=1; --> Table structure With Data
+
+
+--Restore Data
+
+INSERT INTO originalTable
+SELECT * FROM backup_table;
+
+
