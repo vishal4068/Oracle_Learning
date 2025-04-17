@@ -1,0 +1,68 @@
+#Data Definition Language (DDL)
+
+Define the structure of database tables with the help of CREATE, ALTER, TRUNCATE AND DROP
+
+1) CREATE --> Used to create Database objects like tables, views, indexes, procedures, triggers, packages
+  Example - CREATE TABLE table_name(ColName1 DataType, ColName2 DataType,...);
+
+2) ALTER --> Used to modify existing Database objects
+  Example - ALTER TABLE table_name ADD (ColName1 DataType, ColName2 DataType, ...); --> Add new column
+  Example - ALTER TABLE table_name MODIFY ColName1 DataType( 100 ) NOT NULL; --> Modify existing column
+  Example - ALTER TABLE table_name DROP COLUMN ColName1; --> Drop existing column
+  Example - ALTER TABLE table_name RENAME COLUMN old_col_name TO new_col_name; --> Rename column
+
+3) DROP --> Used to remove/drop database objects like tables, views, indexes, procedures, triggers, packages
+  Example - DROP TABLE/VIEW/INDEX/PROCEDURE/TRIGGER/PACKAGE table_name;
+  
+Cascade Constraints - DROP TABLE table_name CASCADE CONSTRAINTS; --> This clause ensures that all referential integrity constraints that refer to primary and unique keys in the table are also removed.
+
+4) TRUNCATE --> Remove all records from table without considering any filtering criteria, 
+Remove data page by page instead of row by row hence we can't apply WHERE clause/condition.
+TRUNCATE is FASTER than DELETE in terms of execution.
+IDENTITY values of tatal column will get reset.(Default value is 1) OR reset it to seed value
+Syntax - GENERATED [ ALWAYS | BY DEFAULT [ ON NULL ] ] AS IDENTITY [ ( identity_options ) ]
+
+
+#Data Manipulation Language(DML)
+
+Used to INSERT, UPDATE, DELETE the existing records of table
+
+1) INSERT --> Used to add new rows to a table.
+  
+-- Insert a single row
+INSERT INTO table_name (column1, column2, column3) VALUES (value1, value2, value3); --> Inserting new records in specific columns oracle server automatically insert NULL values for unspesified column)
+
+-- Insert multiple rows
+INSERT INTO table_name (column1, column2, column3) VALUES 
+(value1, value2, value3),
+(value4, value5, value6);
+
+2)  UPDATE --> Used to update existing records in database tables, 
+
+-- Update specific rows
+UPDATE table_name SET column1 = value1, column2 = value2 WHERE condition; --> Can use WHERE clause to limit the affected rows,
+
+-- Update all rows
+UPDATE table_name SET column1 = value1, column2 = value2; --> if we don't use WHERE clause it will update all rows.
+
+3) DELETE --> Used to remove rows from a table.
+
+-- Delete specific rows
+DELETE FROM table_name WHERE condition;
+
+-- Delete all rows
+DELETE FROM table_name; --> It work same like TRUNCATE but it will not reset identity values.
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
