@@ -103,3 +103,9 @@ If referential integrity (foreign key) exists between two tables, and you try to
 But you can forcefully drop the parent table using:
   DROP TABLE with CASCADE CONSTRAINTS;
      Syntax - DROP TABLE parent_table_name CASCADE CONSTRAINTS;
+
+---------------------
+Candidate Key --> {empid, mobile, email} --> Eligible to become primary key
+Primary Key--> {empid}
+Composite Key --> {empid, mobile}
+Super Key --> {empid, mobile, email}
