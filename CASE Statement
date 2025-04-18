@@ -1,0 +1,37 @@
+#CASE Statement
+-- Write multiple condition in single SELECT statement and return single value based on condition.
+-- Help us to write multiple nestead conditions
+-- We can use with SELECT and UPDATE only
+-- When using UPDATE make sure to use ELSE part because if you don't mension ELSE part it will assign NULL value to all field if any condition is not satisfy.
+
+Example:
+1)
+SELECT emp_id, emp_name, salary,
+      CASE
+        WHEN salary >= 100000 THEN 'High'
+        WHEN salary >= 50000 THEN 'Medium'
+        ELSE 'Low'
+      END AS salary_grade
+FROM employees;
+ 
+2) 
+UPDATE employees
+SET bonus =
+  CASE
+    WHEN salary > 100000 THEN 5000
+    WHEN salary > 50000 THEN 3000
+    -- No ELSE given
+  END;
+
+--Employees with salary > 100000 get bonus 5000.
+Employees with salary > 50000 get bonus 3000.
+Others will get bonus set to NULL because there's no ELSE
+
+3) If we want to keep existing values for others use ELSE
+UPDATE employees
+SET bonus =
+  CASE
+    WHEN salary > 100000 THEN 5000
+    WHEN salary > 50000 THEN 3000
+    ELSE bonus  -- keep current value
+  END;
