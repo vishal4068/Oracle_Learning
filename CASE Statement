@@ -4,6 +4,14 @@
 -- We can use with SELECT and UPDATE only
 -- When using UPDATE make sure to use ELSE part because if you don't mension ELSE part it will assign NULL value to all field if any condition is not satisfy.
 
+Syntax:
+      CASE
+            WHEN condition1 THEN result1
+            WHEN condition2 THEN result2
+            ...
+            ELSE default_result
+      END;
+
 Example:
 1)
 SELECT emp_id, emp_name, salary,
