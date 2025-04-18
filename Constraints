@@ -1,0 +1,105 @@
+# Domain / Integrity Constarints
+  1) NOT NULL
+    - Ensures that a column cannot have a NULL value.
+    - It can be apply on only column level.
+
+  2) DEFAULT
+    - Provides a default value for a column when no value is specified.
+    - It can be apply on only column level.
+
+  3) CHECK
+    - Ensures that all values in a column satisfy a specific condition.
+    - It can be apply on both column level and table level.
+
+# Entity Integrity Constraints
+  1) UNIQUE
+    - Prevent inserting 2 records having identical values in the same column
+    - Creates Non-Clustured index automatically on selected column
+    - It can have only one NULL value
+    - Can have one or more unique columns in a table (We can apply multiple unique contraints on the table)
+    - It can be apply on both column level and table level.
+    - We can have combined unique key (Example - UNIQUE(fname, lname) )
+    - Combined unique column have multiple NULL values only the same combination is not allowed
+
+  2) PRIMARY KEY
+    - Combination of NOT NULL and UNIQUE constraints
+    - Creates Clustured index automatically on selected column (Retrive data faster)
+    - We can have only one PRIMARY KEY per table
+    - It can not have any NULL value
+    - It can be apply on both column level and table level.
+
+# Referential Integrity Constraints
+  1) FOREIGN KEY
+    - It is reference to the PRIMARY KEY, and Help us to maintain integrity between tables.
+    - Table having PRIMARY KEY called Parent Table and Table having FOREIGN KEY called Child Table.
+    - Parent Table should be created before child
+    - Do not create any indexes
+    - Column can have duplicate data
+    - It can be apply on both column level and table level.
+
+-------------------------------------------------------Syntax for all--------------------------------------------------
+-- Create Table with All Constraints
+CREATE TABLE employees (
+  emp_id     NUMBER CONSTRAINT pk_emp PRIMARY KEY,                     -- PRIMARY KEY (named, column-level)
+  first_name VARCHAR2(50) NOT NULL,                                    -- NOT NULL (unnamed)
+  last_name  VARCHAR2(50) CONSTRAINT nn_last_name NOT NULL,            -- NOT NULL (named)
+  email      VARCHAR2(100) UNIQUE,                                     -- UNIQUE (unnamed)
+  phone      VARCHAR2(15) CONSTRAINT uq_phone UNIQUE,                  -- UNIQUE (named)
+  salary     NUMBER DEFAULT 25000,                                     -- DEFAULT (unnamed)
+  bonus      NUMBER CONSTRAINT df_bonus DEFAULT 1000,                  -- DEFAULT (named)
+  age        NUMBER CONSTRAINT chk_age CHECK (age BETWEEN 18 AND 65), -- CHECK (named)
+  dept_id    NUMBER,                                                   -- Will add FK later
+  status     VARCHAR2(20) CHECK (status IN ('Active', 'Inactive')),    -- CHECK (unnamed)
+ 
+  -- Table-Level Constraints
+  CONSTRAINT uq_email_phone UNIQUE (email, phone),                     -- UNIQUE (named, table-level)
+  CONSTRAINT chk_salary CHECK (salary > 0),                            -- CHECK (named, table-level)
+  CONSTRAINT fk_dept FOREIGN KEY (dept_id) REFERENCES departments(dept_id) -- FOREIGN KEY (named, table-level)
+);
+ 
+-- Add Constraints on Existing Table
+ALTER TABLE employees MODIFY last_name NOT NULL;                                                        -- NOT NULL
+ALTER TABLE employees MODIFY bonus DEFAULT 1000;                                                        -- DEFAULT
+ALTER TABLE employees ADD CHECK (bonus >= 0);                                                           -- CHECK
+ALTER TABLE employees ADD CONSTRAINT pk_emp_id PRIMARY KEY (emp_id);                                    -- PRIMARY KEY
+ALTER TABLE employees ADD CONSTRAINT fk_dept_id FOREIGN KEY (dept_id) REFERENCES departments(dept_id);  -- FOREIGN KEY
+ALTER TABLE employees ADD CONSTRAINT uq_email UNIQUE (email);                                           -- UNIQUE
+ALTER TABLE employees ADD CONSTRAINT chk_status CHECK (status IN ('Active', 'Inactive'));               -- CHECK
+
+
+
+-----------------------------------------DROP Constraints------------------------------------
+-- Drop NOT NULL (by making it NULLABLE)
+ALTER TABLE employees MODIFY first_name NULL;
+ALTER TABLE employees MODIFY last_name NULL;
+ 
+-- Drop DEFAULT
+ALTER TABLE employees MODIFY bonus DEFAULT NULL;
+ALTER TABLE employees MODIFY salary DEFAULT NULL;
+ 
+-- Drop CHECK constraints
+ALTER TABLE employees DROP CONSTRAINT chk_age;
+ALTER TABLE employees DROP CONSTRAINT chk_salary;
+ALTER TABLE employees DROP CONSTRAINT chk_status;
+ 
+-- Drop UNIQUE constraints
+ALTER TABLE employees DROP CONSTRAINT uq_phone;
+ALTER TABLE employees DROP CONSTRAINT uq_email;
+ALTER TABLE employees DROP CONSTRAINT uq_email_phone;
+ 
+-- Drop PRIMARY KEY
+ALTER TABLE employees DROP CONSTRAINT pk_emp;
+-- Or if unnamed: (requires knowing the constraint name)
+-- Use: SELECT * FROM user_constraints WHERE table_name = 'EMPLOYEES';
+ 
+-- Drop FOREIGN KEY constraints
+ALTER TABLE employees DROP CONSTRAINT fk_dept;
+ALTER TABLE employees DROP CONSTRAINT fk_dept_id;
+
+
+------Important---------
+If referential integrity (foreign key) exists between two tables, and you try to drop the parent table directly, Oracle will throw an error because the child table depends on it.
+ 
+But you can forcefully drop the parent table using:
+  DROP TABLE with CASCADE CONSTRAINTS;
+     Syntax - DROP TABLE parent_table_name CASCADE CONSTRAINTS;
