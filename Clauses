@@ -1,0 +1,27 @@
+#Clauses
+
+1) WHERE
+  - Filter Data row by row, that means each row will get check against specific WHERE condition.
+  - It work as prefilter (Before rendor it on resultset)
+  - We can use WHERE clause in SELECT, UPDATE and DELETE Statements
+  - Can't use aggregate functions.
+
+2) GROUP BY
+  - It creates a bucket for each and every unique value so that we can apply aggregate functions on that. (COUNT, SUM, AVG, MIN, MAX)
+  - Used to retrive summarised information from the given table name based on provided column name.
+  - Can use GROUP BY clause in SELECT statement only
+  - always come after WHERE (Post summarised after filtering data)
+  - We can't apply GROUP BY on runtime generated column
+  - IMP (It is mandatory to have all columns in SELECT that are with aggregate functions should be there in GROUP by clause, and those column in GROUP BY is not mandatory to have in SELECT)
+
+3) HAVING
+  - Apply condition on summarised information (Filter out summarised information)
+  - Always comes with GROUP BY only...without GROUP BY it will not work
+  - It work as postfilter(Before rendor it on resultset)
+  - Works on run time generated column (We can use alias)
+  - Can use aggregate functions
+  - Can use in SELECT statement only
+
+4) ORDER BY
+  - Arrange data in particular column order
+  - ASC(By Default) / DESC (Descending)
