@@ -374,6 +374,7 @@ ADD_MONTHS(TO_DATE('2025-04-17', 'YYYY-MM-DD'), n * 3)
  
 22. INTERVAL keyword
 --> Create custom interval directly
+-- DAY, WEEK, MONTHS, YEAR, HOUR, SECOND
 -- Example: SELECT SYSDATE + INTERVAL '3' DAY FROM DUAL;
  
 23. CURRENT_DATE - <any date>
