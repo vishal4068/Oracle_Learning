@@ -1,0 +1,81 @@
+#Date Difference
+
+1) Days
+select sysdate - to_date('25-04-2025', 'DD-MM-YYYY') from dual
+
+2) Hours
+select (sysdate - to_date('25-04-2025', 'DD-MM-YYYY'))*24 from dual
+
+3) Minutes
+select (sysdate - to_date('25-04-2025', 'DD-MM-YYYY'))*24*60 from dual
+
+4) Seconds
+select (sysdate - to_date('25-04-2025', 'DD-MM-YYYY'))*24*60*60 from dual
+
+5) Months
+select MONTHS_BETWEEN(sysdate, to_date('23-01-2025', 'DD-MM-YYYY')) from dual
+
+6) Years
+select (MONTHS_BETWEEN(sysdate, to_date('23-01-2025', 'DD-MM-YYYY'))) / 12 from dual
+
+
+#Predict Future and Past Dates
+
+--ADD_MONTHS
+  -- Add 3 months
+    SELECT ADD_MONTHS(SYSDATE, 3) AS plus_3_months FROM dual;
+ 
+  -- Subtract 6 months
+    SELECT ADD_MONTHS(SYSDATE, -6) AS minus_6_months FROM dual;
+ 
+  -- Add fractional months (e.g., 1.5 months = 1 month + 15 days approx.)
+    SELECT ADD_MONTHS(SYSDATE, 1.5) AS plus_1_5_months FROM dual;
+
+
+--INTERVAL
+ 
+  -- YEAR
+  SYSDATE + INTERVAL '2' YEAR AS plus_2_years,
+  SYSDATE - INTERVAL '1' YEAR AS minus_1_year,
+ 
+  -- MONTH
+  SYSDATE + INTERVAL '6' MONTH AS plus_6_months,
+  SYSDATE - INTERVAL '3' MONTH AS minus_3_months,
+ 
+  -- YEAR TO MONTH
+  SYSDATE + INTERVAL '1-4' YEAR TO MONTH AS plus_1y_4m,
+ 
+  -- DAY
+  SYSDATE + INTERVAL '10' DAY AS plus_10_days,
+  SYSDATE + 5 AS minus_5_days,--(Adding 5 Days)
+  SYSDATE - INTERVAL '5' DAY AS minus_5_days,
+  
+ 
+  -- HOUR
+  SYSDATE + INTERVAL '4' HOUR AS plus_4_hours,
+  SYSDATE - INTERVAL '2' HOUR AS minus_2_hours,
+ 
+  -- MINUTE
+  SYSDATE + INTERVAL '30' MINUTE AS plus_30_minutes,
+  SYSDATE - INTERVAL '15' MINUTE AS minus_15_minutes,
+ 
+  -- SECOND
+  SYSDATE + INTERVAL '45' SECOND AS plus_45_seconds,
+  SYSDATE - INTERVAL '20' SECOND AS minus_20_seconds,
+ 
+  -- DAY TO SECOND
+  SYSDATE + INTERVAL '5 03:30:15' DAY TO SECOND AS full_interval_addition,
+ 
+  -- WEEK (using 7 days)
+  SYSDATE + 7 AS plus_1_week,
+  SYSDATE - 14 AS minus_2_weeks,
+ 
+  -- Start of current week (Monday)
+  TRUNC(SYSDATE, 'IW') AS monday_of_week,
+ 
+  -- Week number in year
+  TO_CHAR(SYSDATE, 'WW') AS week_number,
+  TO_CHAR(SYSDATE, 'IW') AS iso_week_number
+
+ 
+
