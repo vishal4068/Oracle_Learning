@@ -51,6 +51,9 @@
 14. TRIM([LEADING|TRAILING|BOTH] trim_char FROM str)
 --> Removes leading/trailing/both characters
 -- Example: TRIM(' ' FROM ' Oracle ') → 'Oracle'
+--select trim(trailing 0 from '06000') as cr from dual; -> 06
+select trim(leading 0 from '06000') as cr from dual; -> 6000
+
  
 15. LTRIM(str [, trim_chars])
 --> Removes leading characters
